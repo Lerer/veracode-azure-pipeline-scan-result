@@ -1,0 +1,36 @@
+{
+  "name": "azure-pipeline-veracode-static-scan-results",
+  "version": "1.0.0",
+  "description": "Azure Pipeline custom task to import the full static scan results",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Lerer/veracode-sast-azure-pipeline-scan-result.git"
+  },
+  "keywords": [
+    "azure",
+    "pipeline",
+    "veracode",
+    "static",
+    "sast",
+    "sarif"
+  ],
+  "author": "Yaakov Lerer",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Lerer/veracode-sast-azure-pipeline-scan-result/issues"
+  },
+  "homepage": "https://github.com/Lerer/veracode-sast-azure-pipeline-scan-result#readme",
+  "dependencies": {
+    "azure-pipelines-task-lib": "^2.10.0"
+  },
+  "devDependencies": {
+    "@types/mocha": "^8.0.2",
+    "@types/node": "^14.0.27",
+    "@types/q": "^1.5.4",
+    "sync-request": "^6.1.0"
+  }
+}
