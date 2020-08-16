@@ -3,7 +3,7 @@
     "id": "build-release-task",
     "name": "Yaakov Lerer Build and Release Tools",
     "version": "0.0.1",
-    "publisher": "Yaakov Lerer",
+    "publisher": "YaakovLerer",
     "targets": [
         {
             "id": "Microsoft.VisualStudio.Services"
@@ -18,7 +18,7 @@
     },
     "files": [
         {
-            "path": "src"
+            "path": "veracodePipelineResultsImportTask"
         }
     ],
     "contributions": [
@@ -29,7 +29,7 @@
                 "ms.vss-distributed-task.tasks"
             ],
             "properties": {
-                "name": "buildAndReleaseTask"
+                "name": "veracodePipelineResultsImportTask"
             }
         }
     ]

@@ -5,7 +5,12 @@ import * as ttm from 'azure-pipelines-task-lib/mock-test';
 describe('Sample task tests', function () {
 
     before( function() {
-
+        process.env.HOME = process.env.USERPROFILE;
+        console.log(process.env.HOME);
+        console.log(process.env.HOMEPATH);
+        console.log(process.env.USERPROFILE);
+        var downloadDirectory = path.join(process.env.HOME || process.env.HOMEPATH || process.env.USERPROFILE || '', 'azure-pipelines-task-lib', '_download') ;
+        console.log(downloadDirectory);
     });
 
     after(() => {
@@ -13,9 +18,10 @@ describe('Sample task tests', function () {
     });
 
     it('should succeed with simple inputs', function(done: Mocha.Done) {
-        this.timeout(1000);
+        this.timeout(10000);
 
         let tp = path.join(__dirname, 'success.js');
+        console.log(tp);
         let tr: ttm.MockTestRunner = new ttm.MockTestRunner(tp);
     
         tr.run();
@@ -29,9 +35,9 @@ describe('Sample task tests', function () {
     });
 
     it('it should fail if tool returns 1', function(done: Mocha.Done) {
-        this.timeout(1000);
-
+        this.timeout(10000);
         let tp = path.join(__dirname, 'failure.js');
+        console.log(tp);
         let tr: ttm.MockTestRunner = new ttm.MockTestRunner(tp);
     
         tr.run();
