@@ -9,18 +9,50 @@
     "author": "Yaakov Lerer",
     "version": {
         "Major": 0,
-        "Minor": 1,
-        "Patch": 0
+        "Minor": 0,
+        "Patch": 7
     },
     "instanceNameFormat": "Echo 'converting [$(samplestring)] to SARIF'",
     "inputs": [
         {
-            "name": "resultFile",
-            "type": "string",
+            "name": "pipelineResultsJson",
+            "type": "filePath",
             "label": "Veracode Pipeline Scan result file name",
             "defaultValue": "results.json",
             "required": true,
             "helpMarkDown": "A sample string"
+        },{
+            "name": "outputResultsSarif",
+            "type": "filePath",
+            "label": "SARIF result file path",
+            "defaultValue": "veracode-results.sarif",
+            "required": true
+        },{
+            "name": "sourceBasePath1",
+            "type": "string",
+            "label": "File path replace with Pattern",
+            "defaultValue": "",
+            "required": false,
+            "helpMarkDown": "In some compilations, the path representation is not the same as the repository root folder. In order to add the ability to navigate back from the scanning issue to the file in the repository, a base path to the source is required. The input format is regex base (`\"[search pattern]:[replace with pattern]\"`)"                
+        },{
+            "name": "sourceBasePath2",
+            "type": "string",
+            "label": "File path replace with Pattern",
+            "defaultValue": "",
+            "required": false,
+            "helpMarkDown": "In some compilations, the path representation is not the same as the repository root folder. In order to add the ability to navigate back from the scanning issue to the file in the repository, a base path to the source is required. The input format is regex base (`\"[search pattern]:[replace with pattern]\"`)"
+        },{
+            "name": "sourceBasePath3",
+            "type": "string",
+            "label": "File path replace with Pattern",
+            "defaultValue": "",
+            "required": false
+        },{
+            "name": "findingRuleLevel",
+            "type": "string",
+            "label": "The conversion rule from Veracode finding levels to SARIF levels",
+            "defaultValue": "4:3:0",
+            "required": true
         }
     ],
     "execution": {

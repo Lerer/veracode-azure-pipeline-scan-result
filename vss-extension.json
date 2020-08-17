@@ -2,7 +2,7 @@
     "manifestVersion": 1,
     "id": "build-release-task",
     "name": "Yaakov Lerer Build and Release Tools",
-    "version": "0.0.1",
+    "version": "0.0.7",
     "publisher": "YaakovLerer",
     "targets": [
         {

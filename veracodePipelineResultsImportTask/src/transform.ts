@@ -1,6 +1,6 @@
 import tl = require('azure-pipelines-task-lib/task');
+
 import * as fs from 'fs';
-import * as path from 'path';
 
 interface Rule  {
     id: string,
@@ -44,7 +44,7 @@ const _parseReplacer = (input:string) => {
     })
 }
 
-const sliceReportLevels = (requestedLevels:string) =>  {
+export const sliceReportLevels = (requestedLevels:string) =>  {
     try {
         const split = requestedLevels.split(':');
         if (split===undefined || split.length!=3){
@@ -159,7 +159,7 @@ const getFilePath = (filePath:string) => {
     }
     },
 */
-const convertPipelineResultFileToSarifFile = (inputFileName:string,outputFileName:string) => {
+export const convertPipelineResultFileToSarifFile = (inputFileName:string,outputFileName:string) => {
     var results:any = {};
 
     let rawdata = fs.readFileSync(inputFileName);
@@ -230,60 +230,3 @@ const convertPipelineResultFileToSarifFile = (inputFileName:string,outputFileNam
         console.log('SARIF file created: '+outputFileName);
     }
 }
-
-
-
-async function run() {
-    try {
-        //const inputString: string | undefined = tl.getInput('resultFile', true);
-
-        
-        const pipelineInputFileName : string|undefined = tl.getInput('pipelineResultsJson',true); // 'results.json'
-        const sarifOutputFileName = tl.getInput('outputResultsSarif',true); // 'veracode-results.sarif'
-        const srcBasePath1 = tl.getInput('sourceBasePath1'); // base path for the source in the repository
-        const srcBasePath2 = tl.getInput('sourceBasePath2'); // base path for the source in the repository
-        const srcBasePath3 = tl.getInput('sourceBasePath3'); // base path for the source in the repository
-        const reportLevels : string = tl.getInput('findingRuleLevel',true) || '4:3:0';
-
-        // if (inputString == 'bad') {
-        //     tl.setResult(tl.TaskResult.Failed, 'Bad input was given');
-        //     return;
-        // }
-        console.log('Hello ', pipelineInputFileName);
-
-        let workingDir:string|undefined = tl.getVariable('System.DefaultWorkingDirectory');
-
-        let localPath : string = path.join(__dirname);
-        let files: string[] = fs.readdirSync(localPath);
-        files.forEach((file) => {
-            console.log(file);
-        })
-        
-
-        console.log(typeof(workingDir));
-
-        if (typeof(workingDir) === 'string') {
-            tl.cd(workingDir);
-
-            files = fs.readdirSync(__dirname);
-            files.forEach((file) => {
-                console.log(file);
-            })
-        }
-
-        try {
-            if (pipelineInputFileName!=undefined && sarifOutputFileName!=undefined) {
-                sliceReportLevels(reportLevels);
-                setupSourceReplacement(srcBasePath1,srcBasePath2,srcBasePath3);
-                convertPipelineResultFileToSarifFile(pipelineInputFileName,sarifOutputFileName);
-            }
-        } catch (error) {
-            tl.setResult(tl.TaskResult.Failed,error.message);
-        }
-    }
-    catch (err) {
-        tl.setResult(tl.TaskResult.Failed, err.message);
-    }
-}
-
-run();
